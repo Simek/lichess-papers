@@ -22,6 +22,19 @@
   affiliation   = {Chalmers University of Technology},
 }
 
+@misc{razlighi2026learningbestvisualdiffusion,
+      title={Learning the Next Best Move with Visual Diffusion Models}, 
+      author={Amir Razlighi and Ali Mahdavi Amiri and Yiorgos Chrysanthou and Andrey Voynov and Daniel Cohen-Or},
+      year={2026},
+      eprint={2611.30879},
+      archivePrefix={arXiv},
+      primaryClass={cs.GR},
+affiliation = {Simon Fraser University; University of Cyprus; CYENS Centre of Excellence; Google DeepMind; Tel Aviv University},
+abstract = {In this paper, we show that visual diffusion models can learn to predict the next best move (NBM) in tasks requiring sequential reasoning and lookahead, without explicitly exploring future steps or exhaustive searching at inference. Previous work demonstrated that these models can generate complete solutions to geometric and reasoning problems. Here, we show that simple fine-tuning on visual state--NBM pairs enables a pretrained model to select actions whose value depends on consequences several steps ahead. Each move is predicted directly in image space from the current state, without an explicit symbolic representation or search procedure. Repeated NBM predictions then construct a solution one decision at a time.
+We demonstrate this capability on chess puzzles and tile-based pathfinding, and show that it extends to Connect Four, Go and billiards. In chess, the model predicts legal moves and finds the best move far more often than by recalling similar training positions, including piece sacrifices whose benefit emerges only through later tactical continuations. In pathfinding, it constructs shortest paths on uniform-cost maps and cost-optimal routes across terrain tiles with different traversal costs, choosing longer routes when they are cheaper overall. These costs are learned implicitly from examples, without numerical cost supervision. These results show that direct visual move prediction can support globally informed decisions and successful sequential problem solving.},
+      url={https://arxiv.org/abs/2611.30879}, 
+}
+
 @article{adorjan:2025:statistical-analysis-of-hungarian-board-game-sales,
   title         = {Statistical Analysis of Hungarian Board Game Sales},
   author        = {Adorján, Balázs and Bednárik, Éva},
