@@ -50,6 +50,7 @@ export function getLinks(fields: Record<string, string | undefined>) {
     ['doi', 'DOI'],
     ['code', 'Code'],
     ['preprint', 'Preprint'],
+    ['dataset', 'Dataset'],
   ] as const;
 
   const links = linkFields.flatMap(([key, label]) => {
@@ -68,12 +69,10 @@ export function getLinks(fields: Record<string, string | undefined>) {
       url,
     };
   });
-  const datasetUrl = getUrl(getField(fields, 'dataset'), 'dataset');
-  const datasetLinks = datasetUrl ? [{ label: 'Dataset', url: datasetUrl }] : [];
 
   return {
     primaryLink: links[0] ?? null,
-    additionalLinks: [...links.slice(1), ...datasetLinks, ...huggingFaceLinks],
+    additionalLinks: [...links.slice(1), ...huggingFaceLinks],
   };
 }
 
