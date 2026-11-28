@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 import { formatLabels } from '~/lib/constants';
-import { type Paper, type RawPaper } from '~/lib/types';
+import { type Paper, type PaperLink, type RawPaper } from '~/lib/types';
 
 export function tw(...classes: (string | false | null | undefined)[]) {
   return twMerge(classes.filter(Boolean).join(' '));
@@ -52,10 +52,29 @@ export function getLinks(fields: Record<string, string | undefined>) {
     ['preprint', 'Preprint'],
   ] as const;
 
-  return linkFields.flatMap(([key, label]) => {
+  const links = linkFields.flatMap(([key, label]) => {
     const url = getUrl(getField(fields, key), key);
     return url ? [{ label, url }] : [];
   });
+  const huggingFaceUrls = getField(fields, 'huggingface')
+    .split(',')
+    .map(value => getUrl(value.trim(), 'huggingface'))
+    .filter((url): url is string => url !== null);
+  const huggingFaceLinks: PaperLink[] = huggingFaceUrls.map(url => {
+    const lastPathSegment = new URL(url).pathname.split('/').filter(Boolean).at(-1);
+    return {
+      label: 'Hugging Face',
+      ...(huggingFaceUrls.length > 1 && lastPathSegment ? { detail: lastPathSegment } : {}),
+      url,
+    };
+  });
+  const datasetUrl = getUrl(getField(fields, 'dataset'), 'dataset');
+  const datasetLinks = datasetUrl ? [{ label: 'Dataset', url: datasetUrl }] : [];
+
+  return {
+    primaryLink: links[0] ?? null,
+    additionalLinks: [...links.slice(1), ...datasetLinks, ...huggingFaceLinks],
+  };
 }
 
 export function formatPaper(record: RawPaper, index: number): Paper {
@@ -82,6 +101,6 @@ export function formatPaper(record: RawPaper, index: number): Paper {
         .filter((value): value is string => typeof value === 'string')
         .join(' ')
     ),
-    links: getLinks(fields),
+    ...getLinks(fields),
   };
 }

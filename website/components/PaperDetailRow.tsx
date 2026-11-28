@@ -118,16 +118,21 @@ export default function PaperDetailRow({ id, paper, query, isExpanded, onCloseEn
                 </p>
               )}
             </div>
-            {paper.links.length > 1 && (
+            {paper.additionalLinks.length > 0 && (
               <div
                 className={tw(
                   'flex flex-col items-start gap-2 pt-0.5',
                   'max-sm:flex-row max-sm:flex-wrap max-sm:gap-x-2.5 max-sm:gap-y-3.5'
                 )}
                 role="group">
-                <h3 className="font-slab mt-0 mb-2 text-[13px] font-medium">Additional links</h3>
-                {paper.links.slice(1).map(link => (
-                  <ExternalLink key={`${link.label}-${link.url}`} href={link.url} label={link.label} />
+                <h3 className="font-slab mt-0 mb-2 text-[13px] font-medium">Additional information</h3>
+                {paper.additionalLinks.map(link => (
+                  <ExternalLink
+                    key={`${link.label}-${link.url}`}
+                    href={link.url}
+                    label={link.label}
+                    detail={link.detail}
+                  />
                 ))}
               </div>
             )}

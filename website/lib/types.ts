@@ -1,3 +1,5 @@
+export type PaperLink = { label: string; url: string; detail?: string };
+
 export type Paper = {
   id: string;
   number: number;
@@ -13,7 +15,8 @@ export type Paper = {
   affiliation?: string;
   keywords: string;
   searchText: string;
-  links: { label: string; url: string }[];
+  primaryLink: PaperLink | null;
+  additionalLinks: PaperLink[];
 };
 
 export type RawPaper = {

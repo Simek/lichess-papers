@@ -100,8 +100,8 @@ export default function PaperRow({ paper, query, isExpanded, onToggle }: PaperRo
             'px-3 py-4 align-middle',
             'max-sm:col-start-1 max-sm:col-end-4 max-sm:row-start-3 max-sm:p-0 max-sm:pt-2.5'
           )}>
-          {paper.links[0] ? (
-            <ExternalLink href={paper.links[0].url} label={paper.links[0].label} />
+          {paper.primaryLink ? (
+            <ExternalLink href={paper.primaryLink.url} label={paper.primaryLink.label} />
           ) : (
             <span className="text-muted text-xs">No source link</span>
           )}
